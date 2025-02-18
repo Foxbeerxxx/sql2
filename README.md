@@ -31,13 +31,33 @@ WHERE
 ```
 ![1](https://github.com/Foxbeerxxx/sql2/blob/main/img/img1.png)`
 
+3. `город нахождения магазина`
+```
+SELECT DISTINCT
+    ci.city
+FROM
+    store s
+JOIN
+    address a ON s.address_id = a.address_id
+JOIN
+    city ci ON a.city_id = ci.city_id
+WHERE
+    s.store_id IN (
+        SELECT
+            s.store_id
+        FROM
+            store s
+        JOIN
+            customer c ON s.store_id = c.store_id
+        GROUP BY
+            s.store_id
+        HAVING
+            COUNT(c.customer_id) > 300
+    );
 
+```
+![2](https://github.com/Foxbeerxxx/sql2/blob/main/img/img2.png)`
 
-
-
-
-
-3. `Заполните здесь этапы выполнения, если требуется ....`
 4. `Заполните здесь этапы выполнения, если требуется ....`
 5. `Заполните здесь этапы выполнения, если требуется ....`
 6. 
