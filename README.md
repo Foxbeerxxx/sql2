@@ -6,6 +6,37 @@
 
 1. `Разворачиваю базу данных sakila и выполняю запросы по заданию`
 `Одним запросом получите информацию о магазине, в котором обслуживается более 300 покупателей, и выведите в результат следующую информацию`
+
+
+## Задание 1 -выполненное одним запросом в БД 
+```
+SELECT
+    s.store_id,
+    COUNT(c.customer_id) AS customer_count,
+    e.first_name AS employee_first_name,
+    e.last_name AS employee_last_name,
+    ci.city AS city
+FROM
+    store s
+JOIN
+    staff e ON s.store_id = e.store_id
+JOIN
+    customer c ON s.store_id = c.store_id
+JOIN
+    address a ON s.address_id = a.address_id
+JOIN
+    city ci ON a.city_id = ci.city_id
+GROUP BY
+    s.store_id, e.first_name, e.last_name, ci.city
+HAVING
+    COUNT(c.customer_id) > 300;
+
+```
+![6](https://github.com/Foxbeerxxx/sql2/blob/main/img/img6.png)`
+
+
+## ********************************************************************************
+## Задание 1 -выполненное отдельными запросами в БД 
 2. `фамилия и имя сотрудника из этого магазина`
 ```
 SELECT
